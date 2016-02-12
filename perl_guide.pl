@@ -88,7 +88,6 @@ while(my $line = <$data>){
 	#Here we are checking to see if the CSV parser can parse the line
 	#it may fail due to bad characters within the line, like incomplete quotes
 	if($parser->parse($line)){
-		
 		#To actually get the fields within the line
 		#@ is used to declare an array, which is like a vector in R
 		my @fields = $parser->fields();
@@ -104,9 +103,9 @@ while(my $line = <$data>){
 		my @field_parts = split /"/, $fields[0];
 		
 		#Lets extract the gene name form the cut up field
-		#Annoyingly enough, perl reserves space before and after the split
-		#@field_parts looks like [(empty),genename,(empty)]
-		my $genename = $field_parts[1];
+		#Annoyingly enough, perl reserves space after the split
+		#@field_parts looks like [genename,(empty)]
+		my $genename = $field_parts[0];
 		
 		#This checks to see if the genename contains the 3rd argument we passed in
 		#There are several ways to check strings. index checks the second argument to
